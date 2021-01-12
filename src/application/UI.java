@@ -4,7 +4,6 @@ import chess.ChessPiece;
 
 public class UI {
 	public static void printBoard(ChessPiece[][] pieces) {
-		
 		for (int row = 0; row < pieces.length; row++) {
 			int currentBoardRow = pieces.length - row;
 			System.out.print(currentBoardRow + " ");
