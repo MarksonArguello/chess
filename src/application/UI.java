@@ -1,8 +1,24 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChessPiece;
+import chess.ChessPosition;
 
 public class UI {
+	public static ChessPosition readChessPosition(Scanner sc) {
+		try {
+			String line = sc.nextLine();
+			char column = line.charAt(0);
+			int row     = Integer.parseInt(line.substring(1));
+			return new ChessPosition(row, column);
+		} catch (RuntimeException e) {
+			throw new InputMismatchException("Erro lendo ChessPosition. Valores válidos de a1 à h8");
+		}
+		
+	}
+	
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int row = 0; row < pieces.length; row++) {
 			int currentBoardRow = pieces.length - row;
