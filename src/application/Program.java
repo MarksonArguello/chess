@@ -2,18 +2,40 @@ package application;
 
 import boardgame.Board;
 import boardgame.Position;
+import chess.ChessException;
 import chess.ChessMatch;
 import chess.ChessPosition;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Program {
 
 	public static void main(String[] args) {
-		//TESTE
+		Scanner sc = new Scanner(System.in);
 		ChessMatch chessMatch = new ChessMatch();
-		UI.printBoard(chessMatch.getPieces());
-		ChessPosition chessPosition = new ChessPosition(1, 'a');
-		//System.out.print(ChessPosition.fromPosition(new Position(7,7)));
-		//FIM TESTE
+
+		while (true) {
+			try {
+				UI.printBoard(chessMatch.getPieces());
+				System.out.print("Source: ");
+				ChessPosition source = UI.readChessPosition(sc);
+				System.out.println();
+				System.out.print("Target: ");
+				ChessPosition target = UI.readChessPosition(sc);
+				chessMatch.performChessMove(source, target);
+			} catch (ChessException e) {
+				System.out.println(e.getMessage());
+				sc.nextLine();
+			} catch (InputMismatchException e) {
+				System.out.println(e.getMessage());
+				sc.nextLine();
+			}
+
+		}
+
+
+
 	}
 
 }
