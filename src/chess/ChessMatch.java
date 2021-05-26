@@ -8,12 +8,14 @@ import chess.pieces.Rook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChessMatch {
 
 	private int turn;
 	private Color currentPlayer;
 	private Board board;
+	private boolean check;
 
 	private List<Piece> piecesOnTheBoard = new ArrayList<>();
 	private List<Piece> capturedPieces = new ArrayList<>();
@@ -99,6 +101,18 @@ public class ChessMatch {
 		board.placePiece(piece, targetPosition);
 		return (ChessPiece) capturedPiece;
 	}
+
+	private void undoMove(Position source, Position target, ChessPiece capturedPiece) {
+		Piece piece = board.removePiece(target);
+		board.placePiece(piece, source);
+
+		if (capturedPiece != null) {
+			board.placePiece(capturedPiece, target);
+			capturedPieces.remove(capturedPiece);
+			piecesOnTheBoard.add(capturedPiece);
+		}
+	}
+
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
 		board.placePiece(piece, new ChessPosition(row, column).toPosition());
 		piecesOnTheBoard.add(piece);
@@ -136,4 +150,20 @@ public class ChessMatch {
 		placeNewPiece('h', 8 , blackRook);
 
 	}
+
+	private Color opponent(Color color) {
+		return (color == Color.WHITE)? Color.BLACK: Color.WHITE;
+	}
+
+	private ChessPiece king(Color color) {
+		List<Piece> pieces = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
+
+		for (Piece p: pieces) {
+			if (p instanceof  King) {
+				return (ChessPiece) p;
+			}
+		}
+		throw new IllegalStateException("Não há rei da cor " + color + " no tabuleiro");
+	}
+
 }
