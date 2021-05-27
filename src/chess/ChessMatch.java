@@ -16,6 +16,7 @@ public class ChessMatch {
 	private Color currentPlayer;
 	private Board board;
 	private boolean check;
+	private boolean checkMate;
 
 	private List<Piece> piecesOnTheBoard = new ArrayList<>();
 	private List<Piece> capturedPieces = new ArrayList<>();
@@ -29,6 +30,10 @@ public class ChessMatch {
 
 	public boolean getCheck() {
 		return this.check;
+	}
+
+	public boolean getCheckMate() {
+		return this.checkMate;
 	}
 
 	public int getTurn() {
@@ -72,7 +77,11 @@ public class ChessMatch {
 		}
 
 		check = testCheck(opponent(currentPlayer));
-		nextTurn();
+		checkMate = testCheckMate(opponent(currentPlayer));
+		if (!checkMate)
+			nextTurn();
+
+
 		return capturedPiece;
 	}
 	
@@ -141,20 +150,20 @@ public class ChessMatch {
 		
 
 		Rook whiteRook = new Rook(this.board, Color.WHITE);
-		placeNewPiece('a', 1 , whiteRook);
+		placeNewPiece('b', 1 , whiteRook);
 
 		whiteRook = new Rook(this.board, Color.WHITE);
-		placeNewPiece('h', 1 , whiteRook);
+		placeNewPiece('h', 7 , whiteRook);
 
 		
 		/*
 		 * BLACK
 		 */
 		King blackKing = new King(this.board, Color.BLACK);
-		placeNewPiece('e', 8 , blackKing);
+		placeNewPiece('a', 8 , blackKing);
 		
 		Rook blackRook= new Rook(this.board, Color.BLACK);
-		placeNewPiece('a', 8 , blackRook);
+		placeNewPiece('b', 8 , blackRook);
 		blackRook= new Rook(this.board, Color.BLACK);
 		placeNewPiece('h', 8 , blackRook);
 
@@ -176,8 +185,8 @@ public class ChessMatch {
 	}
 
 	private boolean testCheck(Color color) {
-		ChessPiece currentPlayerKing = king(color);
-		Position kingPosition = currentPlayerKing.getChessPosition().toPosition();
+		ChessPiece king = king(color);
+		Position kingPosition = king.getChessPosition().toPosition();
 
 		List<Piece> opponentPieces = piecesOnTheBoard.stream().filter(x -> ((ChessPiece) x).getColor() == opponent(color)).collect(Collectors.toList());
 
@@ -187,5 +196,26 @@ public class ChessMatch {
 			}
 		}
 		return false;
+	}
+
+	private boolean testCheckMate(Color color) {
+		List<Piece> pieces = piecesOnTheBoard.stream().filter(x -> ((ChessPiece) x).getColor() == color).collect(Collectors.toList());
+		for (Piece p: pieces) {
+			boolean[][] possibleMoves = p.possibleMoves();
+			for (int row = 0; row < 8; row++) {
+				for (int column = 0; column < 8; column++) {
+					if (possibleMoves[row][column]) {
+						Position source = ((ChessPiece)p).getChessPosition().toPosition();
+						Position target = new Position(row, column);
+						ChessPiece capturedPiece = makeMove(source, target);
+						boolean testCheck = testCheck(color);
+						undoMove(source, target, capturedPiece);
+						if (!testCheck)
+							return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 }
