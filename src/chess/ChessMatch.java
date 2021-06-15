@@ -4,6 +4,7 @@ import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.King;
+import chess.pieces.Pawn;
 import chess.pieces.Rook;
 
 import java.util.ArrayList;
@@ -157,7 +158,15 @@ public class ChessMatch {
 		whiteRook = new Rook(this.board, Color.WHITE);
 		placeNewPiece('h', 7 , whiteRook);
 
-		
+		Pawn whitePawn1 = new Pawn(this.board, Color.WHITE);
+		placeNewPiece('a', 2, whitePawn1);
+
+		Pawn whitePawn2 = new Pawn(this.board, Color.WHITE);
+		placeNewPiece('b', 2, whitePawn2);
+
+		Pawn whitePawn3 = new Pawn(this.board, Color.WHITE);
+		placeNewPiece('c', 2, whitePawn3);
+
 		/*
 		 * BLACK
 		 */
@@ -166,8 +175,12 @@ public class ChessMatch {
 		
 		Rook blackRook= new Rook(this.board, Color.BLACK);
 		placeNewPiece('b', 8 , blackRook);
+
 		blackRook= new Rook(this.board, Color.BLACK);
 		placeNewPiece('h', 8 , blackRook);
+
+		Pawn blackPawn = new Pawn(this.board, Color.BLACK);
+		placeNewPiece('b', 4, blackPawn);
 
 	}
 
