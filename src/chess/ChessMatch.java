@@ -183,6 +183,9 @@ public class ChessMatch {
 		Knight blackKnight = new Knight(this.board, Color.BLACK);
 		placeNewPiece('b', 4, blackKnight);
 
+		Queen blackQueen = new Queen(this.board, Color.BLACK);
+		placeNewPiece('b', 3, blackQueen);
+
 	}
 
 	private Color opponent(Color color) {
