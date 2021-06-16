@@ -146,45 +146,46 @@ public class ChessMatch {
 		/*
 		 * WHITE
 		 */
-		King whiteKing = new King(this.board, Color.WHITE);
-		placeNewPiece('e', 1 , whiteKing);
-		
+		placeNewPiece('a', 1 ,  new Rook(this.board, Color.WHITE));
+		placeNewPiece('b', 1 ,  new Knight(this.board, Color.WHITE));
+		placeNewPiece('c', 1 ,  new Bishop(this.board, Color.WHITE));
+		placeNewPiece('d', 1 ,  new Queen(this.board, Color.WHITE));
+		placeNewPiece('e', 1 , new King(this.board, Color.WHITE));
+		placeNewPiece('f', 1 ,  new Bishop(this.board, Color.WHITE));
+		placeNewPiece('g', 1 ,  new Knight(this.board, Color.WHITE));
+		placeNewPiece('h', 1 ,  new Rook(this.board, Color.WHITE));
 
-		Rook whiteRook = new Rook(this.board, Color.WHITE);
-		placeNewPiece('b', 1 , whiteRook);
 
-		whiteRook = new Rook(this.board, Color.WHITE);
-		placeNewPiece('h', 7 , whiteRook);
-
-		Bishop whiteBishop = new Bishop(this.board, Color.WHITE);
-		placeNewPiece('f', 7 , whiteBishop);
-
-		Pawn whitePawn1 = new Pawn(this.board, Color.WHITE);
-		placeNewPiece('a', 2, whitePawn1);
-
-		Pawn whitePawn2 = new Pawn(this.board, Color.WHITE);
-		placeNewPiece('b', 2, whitePawn2);
-
-		Pawn whitePawn3 = new Pawn(this.board, Color.WHITE);
-		placeNewPiece('c', 2, whitePawn3);
+		placeNewPiece('a', 2, new Pawn(this.board, Color.WHITE));
+		placeNewPiece('b', 2, new Pawn(this.board, Color.WHITE));
+		placeNewPiece('c', 2, new Pawn(this.board, Color.WHITE));
+		placeNewPiece('d', 2, new Pawn(this.board, Color.WHITE));
+		placeNewPiece('e', 2, new Pawn(this.board, Color.WHITE));
+		placeNewPiece('f', 2, new Pawn(this.board, Color.WHITE));
+		placeNewPiece('g', 2, new Pawn(this.board, Color.WHITE));
+		placeNewPiece('h', 2, new Pawn(this.board, Color.WHITE));
 
 		/*
 		 * BLACK
 		 */
-		King blackKing = new King(this.board, Color.BLACK);
-		placeNewPiece('a', 8 , blackKing);
-		
-		Rook blackRook= new Rook(this.board, Color.BLACK);
-		placeNewPiece('b', 8 , blackRook);
+		placeNewPiece('a', 8 ,  new Rook(this.board, Color.BLACK));
+		placeNewPiece('b', 8 ,  new Knight(this.board, Color.BLACK));
+		placeNewPiece('c', 8 ,  new Bishop(this.board, Color.BLACK));
+		placeNewPiece('d', 8 ,  new Queen(this.board, Color.BLACK));
+		placeNewPiece('e', 8 , new King(this.board, Color.BLACK));
+		placeNewPiece('f', 8 ,  new Bishop(this.board, Color.BLACK));
+		placeNewPiece('g', 8 ,  new Knight(this.board, Color.BLACK));
+		placeNewPiece('h', 8 ,  new Rook(this.board, Color.BLACK));
 
-		blackRook= new Rook(this.board, Color.BLACK);
-		placeNewPiece('h', 8 , blackRook);
 
-		Knight blackKnight = new Knight(this.board, Color.BLACK);
-		placeNewPiece('b', 4, blackKnight);
-
-		Queen blackQueen = new Queen(this.board, Color.BLACK);
-		placeNewPiece('b', 3, blackQueen);
+		placeNewPiece('a', 7, new Pawn(this.board, Color.BLACK));
+		placeNewPiece('b', 7, new Pawn(this.board, Color.BLACK));
+		placeNewPiece('c', 7, new Pawn(this.board, Color.BLACK));
+		placeNewPiece('d', 7, new Pawn(this.board, Color.BLACK));
+		placeNewPiece('e', 7, new Pawn(this.board, Color.BLACK));
+		placeNewPiece('f', 7, new Pawn(this.board, Color.BLACK));
+		placeNewPiece('g', 7, new Pawn(this.board, Color.BLACK));
+		placeNewPiece('h', 7, new Pawn(this.board, Color.BLACK));
 
 	}
 
