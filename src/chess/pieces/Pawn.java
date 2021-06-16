@@ -30,8 +30,9 @@ public class Pawn extends ChessPiece {
         }
 
         if (this.getMoveCount() == 0) {
+            Position aux = new Position(row + direction, column);
             newPosition = new Position(row + 2 * direction, column);
-            if (getBoard().positionExists(newPosition) && !getBoard().thereIsAPiece(newPosition)) {
+            if (getBoard().positionExists(newPosition) && !getBoard().thereIsAPiece(newPosition) && getBoard().positionExists(aux) && !getBoard().thereIsAPiece(aux)) {
                 mat[newPosition.getRow()][newPosition.getColumn()] = true;
             }
         }
